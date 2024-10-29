@@ -80,8 +80,8 @@ Configure the GitHub Action to create the cloud resources as well destroying the
 12. Update your repositories README making an assumption that it's the first time the person has come across your code therefore you should explain and guide them through how to use it.  Feel free to expand on some of the key decisions you've made in your design.
 13. Please do bite-sized frequent commits to the repo.
 14. Update the .gitignore file to prevent commits of unnecessary files in the repo.
-15. Segregate the code in separate folders to make the repo look clean.
-16. 
+15. It will be nice to separate the infra code from python and backend code by putting each of them into separate folders.
+    
 
 ## Least Privilege Principle
 
