@@ -31,12 +31,12 @@ module "iam" {
   ]
 }
 
-module "register_user_lambda" {
-  source        = "./modules/lambda_api_gateway"
-  function_name = "jijun_register_user"
-  runtime       = "nodejs16.x"
-  handler       = "jijun_register_user.handler"
-  role_arn      = module.iam.lambda_role_arn
-  source_file   = "build/register_user.zip"
-  environment_variables = { TABLE_NAME = module.dynamodb.table_name }
-}
+# module "register_user_lambda" {
+#   source        = "./modules/lambda_api_gateway"
+#   function_name = "jijun_register_user"
+#   runtime       = "nodejs16.x"
+#   handler       = "jijun_register_user.handler"
+#   role_arn      = module.iam.lambda_role_arn
+#   source_file   = "build/register_user.zip"
+#   environment_variables = { TABLE_NAME = module.dynamodb.table_name }
+# }
