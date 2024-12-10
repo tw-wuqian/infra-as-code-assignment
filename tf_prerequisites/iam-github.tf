@@ -1,19 +1,6 @@
-locals {
-  gihub_oidc_already_exists = true
-}
-
-resource "aws_iam_openid_connect_provider" "default" {
-  count = local.gihub_oidc_already_exists ? 0 : 1
-  url = "https://token.actions.githubusercontent.com"
-  client_id_list = [
-    "sts.amazonaws.com",
-  ]
-  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1", "1c58a3a8518e8759bf075b76b750d4f2df264fcd"]
-}
-
-data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
+data "aws_caller_identity" "current" {}
 resource "aws_iam_role" "github_actions_role" {
   name = format("%s-github-actions-role", var.prefix)
 
@@ -56,7 +43,8 @@ resource "aws_iam_role" "github_actions_role" {
           "Action" : [
             "dynamodb:CreateTable",
             "dynamodb:PutItem",
-            "dynamodb:GetItem"
+            "dynamodb:GetItem",
+            "dynamodb:DescribeTable"
           ],
           "Resource" : "*"
         },
