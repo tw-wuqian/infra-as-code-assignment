@@ -2,17 +2,9 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-module "dynamodb" {
-  source     = "./modules/dynamodb"
-  table_name = "jijun"
-  hash_key   = "jijunid"
-}
-
 module "s3" {
   source      = "./modules/s3"
-  bucket_name = "jj-demo-bucket"
-  index_file  = "path/to/index.html"
-  error_file  = "path/to/error.html"
+  bucket_name = "wei-bucket-1"
 }
 
 
@@ -22,7 +14,7 @@ module "iam" {
   policy_statements = [
     {
       actions = ["dynamodb:PutItem", "dynamodb:GetItem"]
-      resources = [module.dynamodb.table_arn]
+      resources = ["arn:aws:dynamodb:eu-central-1:160071257600:table/wei-1-tfstate-locks"]
     },
     {
       actions = ["s3:PutObject", "s3:GetObject"]
