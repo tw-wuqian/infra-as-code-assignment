@@ -1,8 +1,9 @@
 locals {
   gihub_oidc_already_exists = true
 }
+
 resource "aws_iam_openid_connect_provider" "default" {
-  count                       = local.gihub_oidc_already_exists ? 0 : 1
+  count = local.gihub_oidc_already_exists ? 0 : 1
   url = "https://token.actions.githubusercontent.com"
   client_id_list = [
     "sts.amazonaws.com",
@@ -49,6 +50,15 @@ resource "aws_iam_role" "github_actions_role" {
             "dynamodb:*",
           ],
           "Resource" : format("arn:aws:dynamodb:%s:%s:table/%s-tfstate-locks*", data.aws_region.current.id, data.aws_caller_identity.current.id, var.prefix)
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "dynamodb:CreateTable",
+            "dynamodb:PutItem",
+            "dynamodb:GetItem"
+          ],
+          "Resource" : "*"
         },
         {
           "Effect" : "Allow",

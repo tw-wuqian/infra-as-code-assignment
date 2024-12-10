@@ -10,7 +10,7 @@ module "dynamodb" {
 
 module "s3" {
   source      = "./modules/s3"
-  bucket_name = "ji-bucket"
+  bucket_name = "jj-demo-bucket"
   index_file  = "path/to/index.html"
   error_file  = "path/to/error.html"
 }
