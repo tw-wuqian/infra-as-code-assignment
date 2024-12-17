@@ -4,8 +4,8 @@ data "aws_s3_bucket" "existing" {
 
 resource "aws_s3_bucket_object" "upload_files" {
   for_each = {
-    "index.html" = "./index.html"
-    "error.html" = "./error.html"
+    "index.html" = "terraform/modules/s3/index.html"
+    "error.html" = "terraform/modules/s3/error.html"
   }
 
   bucket = data.aws_s3_bucket.existing.id
