@@ -18,7 +18,7 @@ module "iam" {
     },
     {
       actions = ["s3:PutObject", "s3:GetObject"]
-      resources = ["arn:aws:s3:::my-static-website-bucket/*"]
+      resources = ["arn:aws:s3:::wei-bucket-1/*"]
     }
   ]
 }
