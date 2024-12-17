@@ -16,11 +16,16 @@ data "aws_iam_policy_document" "lambda_assume_role_policy" {
 
 resource "aws_iam_policy" "lambda_policy" {
   name        = "${var.role_name}_policy"
-  description = "Policy for Lambda function to access necessary AWS resources"
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = var.policy_statements
+  description = "IAM policy for the Lambda function"
+  policy      = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      for statement in var.policy_statements : {
+        Effect   = "Allow"
+        Action   = statement.actions
+        Resource = statement.resources
+      }
+    ]
   })
 }
 
