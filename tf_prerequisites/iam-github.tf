@@ -121,6 +121,13 @@ resource "aws_iam_role" "github_actions_role" {
             "s3:GetEncryptionConfiguration"
           ],
           "Resource" : "*"
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "s3:PutBucketPolicy"
+          ],
+          "Resource" : "*"
         }
       ]
     })
