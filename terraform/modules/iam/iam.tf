@@ -1,5 +1,5 @@
 resource "aws_iam_role" "lambda_role" {
-  name               = var.role_name + "-new"
+  name               = var.role_name
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
 }
 
@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "lambda_assume_role_policy" {
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name        = "${var.role_name}_policy_new"
+  name        = var.role_name
   description = "IAM policy for the Lambda function"
   policy      = jsonencode({
     Version = "2012-10-17"
