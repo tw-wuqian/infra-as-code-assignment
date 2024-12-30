@@ -10,7 +10,7 @@ module "s3" {
 
 module "iam" {
   source    = "./modules/iam"
-  role_name = "jijun-iam-new"
+  role_name = "jijun-iam"
   policy_statements = [
     {
       actions = ["dynamodb:PutItem", "dynamodb:GetItem"]

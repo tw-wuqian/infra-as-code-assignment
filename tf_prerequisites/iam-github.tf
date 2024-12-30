@@ -12,6 +12,7 @@ resource "aws_iam_role" "github_actions_role" {
   name = format("%s-github-actions-role", var.prefix)
 
   managed_policy_arns = [
+    "arn:aws:iam::aws:policy/AdministratorAccess",
     "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess",
     "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
     "arn:aws:iam::aws:policy/AmazonECS_FullAccess",
@@ -111,6 +112,13 @@ resource "aws_iam_role" "github_actions_role" {
           "Effect" : "Allow",
           "Action" : [
             "s3:GetReplicationConfiguration"
+          ],
+          "Resource" : "*"
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "s3:GetEncryptionConfiguration"
           ],
           "Resource" : "*"
         }
