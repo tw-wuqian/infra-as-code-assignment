@@ -21,7 +21,8 @@ resource "aws_iam_role" "github_actions_role" {
   inline_policy {
     name = "extra_permissions"
 
-    policy = jsonencode({
+    policy = jsonencode(
+      {
       Version = "2012-10-17"
       Statement = [
         {
@@ -89,6 +90,20 @@ resource "aws_iam_role" "github_actions_role" {
           "Effect" : "Allow",
           "Action" : [
             "ecr:GetAuthorizationToken"
+          ],
+          "Resource" : "*"
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "s3:GetAccelerateConfiguration"
+          ],
+          "Resource" : "*"
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "s3:GetLifecycleConfiguration"
           ],
           "Resource" : "*"
         }
