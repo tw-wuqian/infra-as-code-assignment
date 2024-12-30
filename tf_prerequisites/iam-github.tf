@@ -22,8 +22,7 @@ resource "aws_iam_role" "github_actions_role" {
   inline_policy {
     name = "extra_permissions"
 
-    policy = jsonencode(
-      {
+    policy = jsonencode({
       Version = "2012-10-17"
       Statement = [
         {
