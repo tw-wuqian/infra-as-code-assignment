@@ -1,6 +1,6 @@
 
 resource "aws_s3_bucket" "static_website" {
-  bucket = ""
+  bucket = "iam-new"
 
   tags = {
     Name        = "StaticWebsiteBucket"
