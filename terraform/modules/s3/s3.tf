@@ -17,7 +17,7 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
         Sid       = "PublicReadGetObject",
         Effect    = "Allow",
         Principal = "*",
-        Action    = "s3:GetObject",
+        Action    = "s3:PutBucketPolicy",
         Resource  = "${aws_s3_bucket.static_website.arn}/*"
       }
     ]
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
 
 resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.static_website.bucket
-  key    = "./index.html"
+  key    = "index.html"
   source = "./index.html"
   acl    = "public-read"
   content_type = "text/html"
@@ -34,7 +34,7 @@ resource "aws_s3_object" "index_html" {
 
 resource "aws_s3_object" "error_html" {
   bucket = aws_s3_bucket.static_website.bucket
-  key    = "./error.html"
+  key    = "error.html"
   source = "./error.html"
   acl    = "public-read"
   content_type = "text/html"
