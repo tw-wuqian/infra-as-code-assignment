@@ -30,7 +30,7 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
       {
         Effect    = "Allow",
         Principal = {
-          AWS = "arn:aws:iam::123456789012:role/jijun-assign-github-actions-role"
+          AWS = "arn:aws:iam::160071257600:role/jijun-assign-github-actions-role"
         },
         Action   = "s3:PutBucketPolicy",
         Resource = "arn:aws:s3:::jijun-s3"
