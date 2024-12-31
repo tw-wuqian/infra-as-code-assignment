@@ -14,11 +14,12 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid       = "PublicReadGetObject",
         Effect    = "Allow",
-        Principal = "*",
-        Action    = "s3:PutBucketPolicy",
-        Resource  = "${aws_s3_bucket.static_website.arn}/*"
+        "Principal": {
+          "AWS": "arn:aws:iam::***:role/jijun-assign-github-actions-role"
+        },
+        "Action": "s3:PutBucketPolicy",
+        "Resource": "arn:aws:s3:::iam-new"
       }
     ]
   })
