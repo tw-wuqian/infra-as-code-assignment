@@ -42,7 +42,7 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
 resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.static_website.bucket
   key    = "index.html"
-  source = "${path.module}//index.html"
+  source = "${path.module}/index.html"
   content_type = "text/html"
 }
 
