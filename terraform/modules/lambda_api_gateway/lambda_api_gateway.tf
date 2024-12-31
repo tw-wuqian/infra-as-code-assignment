@@ -1,10 +1,10 @@
 resource "aws_lambda_function" "register_user" {
-  filename         = "register_user.py"
+  filename         = "${path.module}/register_verify_user.zip"
   function_name    = "registerUser"
   role             = var.lambda_role_arn
   handler          = "register_user.lambda_handler"
   runtime          = "python3.8"
-  source_code_hash = filebase64sha256("${path.module}/register_user.py")
+  source_code_hash = filebase64sha256("${path.module}/register_verify_user.zip")
 }
 
 resource "aws_apigatewayv2_api" "api_gateway" {
