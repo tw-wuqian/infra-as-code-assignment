@@ -28,7 +28,6 @@ module "register_user_lambda" {
   function_name = "jijun_register_user"
   runtime       = "nodejs16.x"
   handler       = "jijun_register_user.handler"
-  role_arn      = module.iam.role_arn
   lambda_role_arn = "arn:aws:iam::160071257600:role/jijun-iam"
   source_file   = "./modules/register_user.py"
 #   environment_variables = { TABLE_NAME = module.iam.table_name }
