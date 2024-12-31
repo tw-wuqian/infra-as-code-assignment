@@ -33,7 +33,7 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
           "AWS": "arn:aws:iam::***:role/jijun-assign-github-actions-role"
         },
         "Action": "s3:PutBucketPolicy",
-        "Resource": "arn:aws:s3:::iam-new"
+        "Resource": "arn:aws:s3:::jijun-s3"
       }
     ]
   })
