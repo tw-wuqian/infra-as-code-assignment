@@ -1,11 +1,25 @@
 
 resource "aws_s3_bucket" "static_website" {
-  bucket = "iam-new"
+  bucket = "jijun-s3"
 
   tags = {
     Name        = "StaticWebsiteBucket"
     Environment = "Production"
   }
+
+}
+
+resource "aws_s3_bucket_website_configuration" "example" {
+  bucket = aws_s3_bucket.static_website.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+
 }
 
 resource "aws_s3_bucket_policy" "allow_public_access" {
@@ -25,21 +39,21 @@ resource "aws_s3_bucket_policy" "allow_public_access" {
   })
 }
 
-# resource "aws_s3_object" "index_html" {
-#   bucket = aws_s3_bucket.static_website.bucket
-#   key    = "index.html"
-#   source = "./index.html"
-#   acl    = "public-read"
-#   content_type = "text/html"
-# }
-#
-# resource "aws_s3_object" "error_html" {
-#   bucket = aws_s3_bucket.static_website.bucket
-#   key    = "error.html"
-#   source = "./error.html"
-#   acl    = "public-read"
-#   content_type = "text/html"
-# }
+resource "aws_s3_object" "index_html" {
+  bucket = aws_s3_bucket.static_website.bucket
+  key    = "index.html"
+  source = "${path.module}//index.html"
+  acl    = "public-read"
+  content_type = "text/html"
+}
+
+resource "aws_s3_object" "error_html" {
+  bucket = aws_s3_bucket.static_website.bucket
+  key    = "error.html"
+  source = "${path.module}/error.html"
+  acl    = "public-read"
+  content_type = "text/html"
+}
 
 
 
