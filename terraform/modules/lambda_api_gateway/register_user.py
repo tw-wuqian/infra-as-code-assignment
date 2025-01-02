@@ -16,5 +16,5 @@ def lambda_handler(event, context):
         print("DynamoDB put_item response:", response)
         return { "message": "Registered User Successfully" }
     except Exception as error_details:
-        print(error_details)
+        print("Error during put_item operation:", error_details)
         return { "message": "Error registering user. Check Logs for more details." }
