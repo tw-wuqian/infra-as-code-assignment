@@ -43,7 +43,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
           "dynamodb:UpdateItem",
           "dynamodb:DeleteItem"
         ],
-        Resource = aws_dynamodb_table
+        Resource = "arn:aws:dynamodb:eu-central-1:160071257600:table/wei-1-tfstate-locks"
       },
       {
         Effect   = "Allow",
