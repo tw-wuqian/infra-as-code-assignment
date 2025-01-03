@@ -13,7 +13,7 @@ resource "aws_lambda_function" "register_user" {
   }
 }
 resource "aws_cloudwatch_log_group" "lambda_logs" {
-  name              = "/aws/lambda/wei_lambda"
+  name = "/aws/lambda/${aws_lambda_function.register_user.function_name}"
   retention_in_days = 14
 }
 
@@ -43,6 +43,14 @@ resource "aws_apigatewayv2_stage" "default" {
     format          = "$context.requestId $context.identity.sourceIp $context.identity.caller $context.identity.user $context.requestTime $context.httpMethod $context.resourcePath $context.status $context.protocol $context.responseLength"
   }
 }
+resource "aws_lambda_permission" "apigateway_invoke" {
+  statement_id  = "AllowApiGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.register_user.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.api_gateway.execution_arn}/*"
+}
+
 
 output "api_gateway_url" {
   value = aws_apigatewayv2_stage.default.invoke_url
