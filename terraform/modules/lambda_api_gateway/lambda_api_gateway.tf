@@ -37,16 +37,28 @@ resource "aws_apigatewayv2_api" "api_gateway" {
   protocol_type = "HTTP"
 }
 
-resource "aws_apigatewayv2_integration" "lambda_integration" {
+resource "aws_apigatewayv2_integration" "lambda_integration_register" {
   api_id           = aws_apigatewayv2_api.api_gateway.id
   integration_type = "AWS_PROXY"
   integration_uri  = aws_lambda_function.register_user.invoke_arn
 }
 
-resource "aws_apigatewayv2_route" "register_route" {
+resource "aws_apigatewayv2_integration" "lambda_integration_verify" {
+  api_id           = aws_apigatewayv2_api.api_gateway.id
+  integration_type = "AWS_PROXY"
+  integration_uri  = aws_lambda_function.verify_user.invoke_arn
+}
+
+resource "aws_apigatewayv2_route" "register_route_register" {
   api_id    = aws_apigatewayv2_api.api_gateway.id
   route_key = "POST /register"
-  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration_register.id}"
+}
+
+resource "aws_apigatewayv2_route" "register_route_verify" {
+  api_id    = aws_apigatewayv2_api.api_gateway.id
+  route_key = "POST /"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration_verify.id}"
 }
 
 resource "aws_apigatewayv2_stage" "default" {

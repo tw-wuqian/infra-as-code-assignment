@@ -35,7 +35,7 @@ def is_key_in_db(db_key):
             logger.info("Item with key: {db_key} not found")
             return False
     except Exception as err:
-       logger.info("Error Getting Item: ",{err})
+        logger.info("Error Getting Item: ",{err})
         print(f"Error Getting Item: {err}")
         return False
     else:
