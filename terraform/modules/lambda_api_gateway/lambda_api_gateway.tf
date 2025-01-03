@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "register_user" {
-  filename         = "${path.module}/register_verify_user.zip"
+  filename         = "${path.module}/register_user.zip"
   function_name    = "registerUser"
   role             = var.lambda_role_arn
   handler          = "register_user.lambda_handler"
@@ -7,6 +7,22 @@ resource "aws_lambda_function" "register_user" {
   source_code_hash = filebase64sha256("${path.module}/register_verify_user.zip")
   environment {
     variables = {
+      DB_TABLE_NAME = "wei-1-tfstate-locks"
+    }
+  }
+}
+
+
+resource "aws_lambda_function" "verify_user" {
+  filename         = "${path.module}/verify_user.zip"
+  function_name    = "verifyUser"
+  role             = var.lambda_role_arn
+  handler          = "verify_user.lambda_handler"
+  runtime          = "python3.8"
+  source_code_hash = filebase64sha256("${path.module}/verify_user.zip")
+  environment {
+    variables = {
+      WEBSITE_S3 = "jijun-s3",
       DB_TABLE_NAME = "wei-1-tfstate-locks"
     }
   }
