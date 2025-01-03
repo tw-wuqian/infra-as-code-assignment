@@ -21,7 +21,7 @@ def lambda_handler(event, context):
             "body": html_body,
         }
     except Exception as error_details:
-        logger.info("Error details is: ",error_details)
+        logger.info("Error details is: %s",error_details)
         print(error_details)
         return "Error verifying user. Check Logs for more details."
 
@@ -32,10 +32,10 @@ def is_key_in_db(db_key):
     try:
         response = db_table.get_item(Key=db_key)
         if "Item" not in response:
-            logger.info("Item with key: {db_key} not found")
+            logger.info(f"Item with key: {db_key} not found")
             return False
     except Exception as err:
-        logger.info("Error Getting Item: ", {err})
+        logger.info("Error Getting Item: %s", err)
         print(f"Error Getting Item: {err}")
         return False
     else:
