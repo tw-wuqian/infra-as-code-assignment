@@ -31,6 +31,7 @@ def is_key_in_db(db_key):
     db_table = db_client.Table(getenv("DB_TABLE_NAME"))
     try:
         response = db_table.get_item(Key=db_key)
+        logger.info("Response is: %s", response)
         if "Item" not in response:
             logger.info(f"Item with key: {db_key} not found")
             return False
