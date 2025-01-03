@@ -11,6 +11,7 @@ def lambda_handler(event, context):
     try:
         logger.info("Received event: %s", event)
         query_string = dict(parse_qsl(event["rawQueryString"]))
+        logger.info("query_string is: %s", query_string)
         item_found = is_key_in_db(db_key=query_string)
         result_file = "index.html" if item_found else "error.html"
         response = s3_client.get_object(Bucket=getenv("WEBSITE_S3"), Key=result_file)
