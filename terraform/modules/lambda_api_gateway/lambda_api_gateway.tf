@@ -5,7 +5,6 @@ resource "aws_lambda_function" "register_user" {
   handler          = "register_user.lambda_handler"
   runtime          = "python3.8"
   source_code_hash = filebase64sha256("${path.module}/register_verify_user.zip")
-  depends_on = [aws_cloudwatch_log_group.lambda_logs]
   environment {
     variables = {
       DB_TABLE_NAME = "wei-1-tfstate-locks"
