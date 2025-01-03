@@ -58,6 +58,11 @@ resource "aws_iam_role_policy" "lambda_policy" {
         "Effect" : "Allow",
         "Action" : "lambda:InvokeFunction",
         Resource = "arn:aws:lambda:eu-central-1:160071257600:function:registerUser"
+      },
+      {
+        "Effect": "Allow",
+        "Action": "s3:GetObject",
+        "Resource": "arn:aws:s3:::jijun-s3/*"
       }
     ]
   })
